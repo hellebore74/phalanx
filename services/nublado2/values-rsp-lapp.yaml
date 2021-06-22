@@ -10,27 +10,32 @@ nublado2:
       storage:
         type: none
 
+    lab:
+      enable_moneypenny: 'true'
+ 
     ingress:
       hosts: ["rsp.lapp.in2p3.fr"]
       annotations:
         nginx.ingress.kubernetes.io/auth-signin: "https://rsp.lapp.in2p3.fr/login"
 
   config:
-    base_url: "rsp.lapp.in2p3.fr/"
+    base_url: "https://rsp.lapp.in2p3.fr/"
 
     volumes:
       - name: data
-        hostPath:
-          path: /home/lsst/data
+        nfs:
+          path: /var/nfsdir/data
+          server: 134.158.100.202
       - name: home
-        hostPath:
-          path: /home/lsst/homedirs
+        nfs:
+          path: /var/nfsdir/jhome
+          server: 134.158.100.202
+
     volume_mounts:
       - name: data
         mountPath: /data
       - name: home
         mountPath: /home
-
 
   vault_secret_path: "secret/k8s_operator/rsp-lapp/nublado2"
   gafaelfawr_secrets_path: "secret/k8s_operator/rsp-lapp/gafaelfawr"

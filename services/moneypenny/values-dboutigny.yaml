@@ -1,17 +1,17 @@
 moneypenny:
-  host: "rsp.lapp.in2p3.fr"
+  host: "dboutigny.freeboxos.fr"
 
   ingress:
     enabled: true
     hosts:
-      - host: rsp.lapp.in2p3.fr
+      - host: dboutigny.freeboxos.fr
         paths: ["/moneypenny"]
     annotations:
-      nginx.ingress.kubernetes.io/auth-url: "https://rsp.lapp.in2p3.fr/auth?scope=exec:admin"
+      nginx.ingress.kubernetes.io/auth-url: "https://dboutigny.freeboxos.fr/auth?scope=exec:admin"
 
   vault_secrets:
     enabled: true
-    path: "secret/k8s_operator/rsp-lapp/pull-secret"
+    path: "secret/k8s_operator/dboutigny.freeboxos.fr/pull-secret"
 
   orders: |
     commission:
@@ -21,8 +21,8 @@ moneypenny:
           runAsUser: 0
           runAsNonRootUser: false
         volumeMounts:
-        - name: homedirs
-          mountPath: /homedirs
+        - mountPath: /homedirs
+          name: homedirs
     retire:
       - name: farthing
         image: lsstsqre/farthing
@@ -33,6 +33,5 @@ moneypenny:
     volumes:
       - name: homedirs
         nfs:
-          server: 134.158.100.202
-          path: /var/nfsdir/jhome
-
+          server: 192.168.0.69
+          path: /jhome

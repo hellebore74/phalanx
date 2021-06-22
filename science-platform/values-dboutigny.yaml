@@ -1,6 +1,6 @@
-environment: rsp-lapp
-fqdm: rsp.lapp.in2p3.fr
-vault_path_prefix: secret/k8s_operator/rsp-lapp
+environment: dboutigny
+fqdm: dboutigny.freeboxos.fr
+vault_path_prefix: secret/k8s_operator/dboutigny.freeboxos.fr
 
 argo:
   enabled: true
@@ -21,7 +21,7 @@ influxdb:
 kapacitor:
   enabled: false
 landing_page:
-  enabled: false
+  enabled: true
 logging:
   enabled: false
 mobu:
